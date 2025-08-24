@@ -6,3 +6,20 @@ resource "aws_instance" "my_ec2" {
     Name = "MyTerraformEC2"
   }
 }
+resource "aws_db_instance" "mydb" {
+  allocated_storage    = 20
+  engine               = "mysql"
+  engine_version       = "8.0"
+  instance_class       = "db.t3.micro"
+  name                 = "mydatabase"
+  username             = "admin"
+  password             = "Password123!"  # change to a secure password
+  parameter_group_name = "default.mysql8.0"
+  skip_final_snapshot  = true
+
+  publicly_accessible = true  # for testing, set false for production
+
+  tags = {
+    Name = "TerraformRDS"
+  }
+}
